@@ -102,7 +102,7 @@ export default function CityView({ city, direction }: CityViewProps) {
         transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
         className="absolute inset-0 overflow-hidden"
       >
-        {/* Weather animation background (always rendered) */}
+        {/* Weather animation background (always rendered, day/night aware) */}
         <WeatherAnimation condition={condition} isDay={isDay} />
 
         {/* Photo overlay */}
@@ -124,42 +124,59 @@ export default function CityView({ city, direction }: CityViewProps) {
           </motion.div>
         )}
 
-        {/* Glass overlay */}
+        {/* Glass overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
 
         {/* Content */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-white">
-          {/* City name + country */}
+          {/* City name + country with subtle entrance */}
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
+            initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="text-center mb-6"
           >
-            <h1 className="text-[clamp(2rem,6vw,4rem)] font-light tracking-wider leading-tight">{city.name}</h1>
-            <p className="text-[clamp(0.9rem,2vw,1.2rem)] font-light opacity-50 tracking-[0.3em] uppercase mt-1">
+            <motion.h1
+              className="text-[clamp(2rem,6vw,4rem)] font-light tracking-wider leading-tight"
+              animate={{ letterSpacing: ['0.1em', '0.15em', '0.1em'] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              {city.name}
+            </motion.h1>
+            <motion.p
+              className="text-[clamp(0.9rem,2vw,1.2rem)] font-light opacity-50 tracking-[0.3em] uppercase mt-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
               {city.country}
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Clock */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.85, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.25, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <AnimatedClock timezone={city.timezone} />
           </motion.div>
 
-          {/* Weather pill */}
+          {/* Weather pill — enhanced with glass morphism */}
           {weather && (
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="mt-8 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 flex items-center gap-4"
+              initial={{ y: 25, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ delay: 0.45, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-8 px-6 py-3.5 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 flex items-center gap-4 shadow-lg shadow-black/10"
             >
-              <span className="text-2xl">{weatherCodeToIcon(weather.weatherCode, weather.isDay)}</span>
+              <motion.span
+                className="text-2xl"
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                {weatherCodeToIcon(weather.weatherCode, weather.isDay)}
+              </motion.span>
               <div>
                 <p className="text-lg font-medium">{weather.temperature}°F</p>
                 <p className="text-xs opacity-60">{weatherCodeToLabel(weather.weatherCode)}</p>
@@ -172,23 +189,32 @@ export default function CityView({ city, direction }: CityViewProps) {
             </motion.div>
           )}
 
-          {/* Wiki fact */}
+          {/* Wiki fact — LEGIBLE glass card with good contrast */}
           {wikiFact && (
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 25, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-              className="mt-6 max-w-md text-center"
+              transition={{ delay: 0.65, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 max-w-lg w-full"
             >
-              <p className="text-sm opacity-50 leading-relaxed italic">&ldquo;{wikiFact.extract}&rdquo;</p>
-              <a
-                href={wikiFact.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-2 text-xs opacity-40 hover:opacity-70 transition-opacity underline underline-offset-2"
-              >
-                More on Wikipedia →
-              </a>
+              <div className="relative px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
+                {/* Decorative quote mark */}
+                <span className="absolute -top-2 left-4 text-3xl text-white/20 font-serif leading-none select-none">&ldquo;</span>
+                <p className="text-sm text-white/80 leading-relaxed pl-3">
+                  {wikiFact.extract}
+                </p>
+                <div className="flex items-center justify-between mt-3 pt-2 border-t border-white/10">
+                  <span className="text-xs text-white/30 font-medium tracking-wide uppercase">About {city.name}</span>
+                  <a
+                    href={wikiFact.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-300/70 hover:text-blue-300 transition-colors underline underline-offset-2"
+                  >
+                    Wikipedia →
+                  </a>
+                </div>
+              </div>
             </motion.div>
           )}
         </div>

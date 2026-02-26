@@ -71,6 +71,14 @@ export default function Home() {
     [cities, selectedCity]
   );
 
+  const reorderCities = useCallback(
+    (newOrder: SavedCity[]) => {
+      setCities(newOrder);
+      saveCities(newOrder);
+    },
+    []
+  );
+
   // Keyboard navigation
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -183,6 +191,7 @@ export default function Home() {
         onSelect={selectCity}
         onRemove={removeCity}
         onAdd={addCity}
+        onReorder={reorderCities}
       />
     </main>
   );
