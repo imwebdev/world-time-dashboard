@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
 import './globals.css';
 
 const inter = Inter({
@@ -13,12 +16,26 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'World Time Dashboard',
-  description: 'A premium animated world time dashboard with live weather, city photos, and AI-generated backgrounds.',
+  title: {
+    default: 'AV Toolbox | Free Production Tools for Streaming & Broadcast',
+    template: '%s | AV Toolbox',
+  },
+  description: 'Free production-grade calculators and utilities for live streaming, broadcast, and AV professionals. Bitrate calculator, stream delay, safe areas, and more.',
+  keywords: ['AV tools', 'streaming calculator', 'broadcast tools', 'bitrate calculator', 'stream delay', 'live production', 'audio video'],
   openGraph: {
-    title: 'World Time Dashboard',
-    description: 'Beautiful world clock with live weather and city photos',
+    title: 'AV Toolbox | Free Production Tools for Streaming & Broadcast',
+    description: 'Free production-grade calculators and utilities for live streaming, broadcast, and AV professionals.',
     type: 'website',
+    siteName: 'AV Toolbox',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AV Toolbox | Free Production Tools',
+    description: 'Free production-grade calculators and utilities for AV professionals.',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -28,9 +45,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body className="antialiased bg-black text-white overflow-hidden">
-        {children}
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+      <body className="antialiased bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col">
+        <ThemeProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

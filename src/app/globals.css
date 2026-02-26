@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-sans: var(--font-inter);
   --font-mono: var(--font-mono);
+  --color-blue-550: #4f6df5;
 }
 
 * {
@@ -11,24 +14,20 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-  color: #fff;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.font-clock {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum';
-}
-
-/* Smooth scrollbar for the drawer */
+/* Smooth scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,8 +35,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* Reduced motion */
@@ -49,4 +52,75 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Prose/article styling */
+.prose-av h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-av h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-av p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+.prose-av ul,
+.prose-av ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.prose-av li {
+  margin-bottom: 0.5rem;
+  line-height: 1.65;
+}
+
+.prose-av ul li {
+  list-style-type: disc;
+}
+
+.prose-av ol li {
+  list-style-type: decimal;
+}
+
+.prose-av strong {
+  font-weight: 600;
+}
+
+.prose-av table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.prose-av th,
+.prose-av td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid;
+}
+
+.prose-av th {
+  font-weight: 600;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
