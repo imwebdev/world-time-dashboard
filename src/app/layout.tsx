@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 import './globals.css';
 
 const inter = Inter({
@@ -15,25 +13,12 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'TimeTools - Free Time & Date Tools',
-    template: '%s | TimeTools',
-  },
-  description: 'Free online time and date tools: world clock, timezone converter, date calculator, countdown timer, stopwatch, and meeting planner. No signup required.',
+  title: 'World Time Dashboard',
+  description: 'A premium animated world time dashboard with live weather, city photos, and AI-generated backgrounds.',
   openGraph: {
-    title: 'TimeTools - Free Time & Date Tools',
-    description: 'Free online time and date tools for teams, travelers, and remote workers. World clock, timezone converter, date calculator, and more.',
+    title: 'World Time Dashboard',
+    description: 'Beautiful world clock with live weather and city photos',
     type: 'website',
-    siteName: 'TimeTools',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'TimeTools - Free Time & Date Tools',
-    description: 'Free online time and date tools for teams, travelers, and remote workers.',
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 
@@ -44,10 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body className="antialiased">
-        <Navbar />
+      <body className="antialiased bg-black text-white overflow-hidden">
         {children}
-        <Footer />
       </body>
     </html>
   );

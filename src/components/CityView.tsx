@@ -221,7 +221,7 @@ export default function CityView({ city, direction }: CityViewProps) {
               initial={{ y: 25, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               transition={{ delay: 0.45, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-12 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 flex items-center gap-5 shadow-lg shadow-black/10"
+              className="mt-10 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 flex items-center gap-5 shadow-lg shadow-black/10"
             >
               <motion.span
                 className="text-2xl"
@@ -248,14 +248,14 @@ export default function CityView({ city, direction }: CityViewProps) {
               initial={{ y: 25, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.65, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-12 max-w-lg w-full"
+              className="mt-8 max-w-lg w-full"
             >
-              <div className="relative p-5 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
-                <span className="absolute -top-3 left-6 text-3xl text-white/20 font-serif leading-none select-none">&ldquo;</span>
+              <div className="relative px-10 py-8 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
+                <span className="absolute -top-3 left-7 text-3xl text-white/20 font-serif leading-none select-none">&ldquo;</span>
                 <p className="text-sm text-white/80 leading-relaxed pl-4">
                   {wikiFact.extract}
                 </p>
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/10">
                   <span className="text-xs text-white/30 font-medium tracking-wide uppercase">About {city.name}</span>
                   <a
                     href={wikiFact.url}

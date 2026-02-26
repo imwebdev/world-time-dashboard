@@ -3,19 +3,6 @@
 @theme inline {
   --font-sans: var(--font-inter);
   --font-mono: var(--font-mono);
-
-  /* Stripe-inspired design system */
-  --color-primary: #0a2540;
-  --color-secondary: #425466;
-  --color-muted: #8898aa;
-  --color-accent: #0073e6;
-  --color-accent-hover: #005bb5;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f6f9fc;
-  --color-surface-dim: #fafbfc;
-  --color-border: #e6ebf1;
-  --color-border-light: #f0f3f7;
-  --color-navy: #0a2540;
 }
 
 * {
@@ -24,15 +11,13 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+html,
 body {
-  min-height: 100vh;
+  height: 100%;
   width: 100%;
-  background: var(--color-surface);
-  color: var(--color-primary);
+  overflow: hidden;
+  background: #000;
+  color: #fff;
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
@@ -41,23 +26,9 @@ body {
   font-feature-settings: 'tnum';
 }
 
-/* Ad slot styling */
-.ad-slot {
-  border: 2px dashed var(--color-border);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-muted);
-  font-size: 0.875rem;
-  background: var(--color-surface-dim);
-  min-height: 90px;
-}
-
-/* Scrollbar — light theme */
+/* Smooth scrollbar for the drawer */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -65,17 +36,8 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(10, 37, 64, 0.12);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(10, 37, 64, 0.22);
-}
-
-/* Override scrollbar for dark containers (world clock) */
-.dark-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
 }
 
 /* Reduced motion */
@@ -87,18 +49,4 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* FAQ accordion styling */
-details summary {
-  cursor: pointer;
-  list-style: none;
-}
-
-details summary::-webkit-details-marker {
-  display: none;
-}
-
-details[open] summary .faq-chevron {
-  transform: rotate(180deg);
 }
