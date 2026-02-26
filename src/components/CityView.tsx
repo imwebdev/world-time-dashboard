@@ -250,12 +250,12 @@ export default function CityView({ city, direction }: CityViewProps) {
               transition={{ delay: 0.65, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="mt-8 max-w-lg w-full"
             >
-              <div className="relative px-8 py-6 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
-                <span className="absolute -top-3 left-5 text-3xl text-white/20 font-serif leading-none select-none">&ldquo;</span>
-                <p className="text-sm text-white/80 leading-relaxed pl-3">
+              <div className="relative px-10 py-8 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
+                <span className="absolute -top-3 left-7 text-3xl text-white/20 font-serif leading-none select-none">&ldquo;</span>
+                <p className="text-sm text-white/80 leading-relaxed pl-4">
                   {wikiFact.extract}
                 </p>
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/10">
                   <span className="text-xs text-white/30 font-medium tracking-wide uppercase">About {city.name}</span>
                   <a
                     href={wikiFact.url}
