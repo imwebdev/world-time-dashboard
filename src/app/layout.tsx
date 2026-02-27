@@ -5,18 +5,20 @@ import './globals.css';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'World Time Dashboard',
-  description: 'A premium animated world time dashboard with live weather, city photos, and AI-generated backgrounds.',
+  title: 'World Time',
+  description: 'A premium animated world time dashboard with live weather and city photography.',
   openGraph: {
-    title: 'World Time Dashboard',
+    title: 'World Time',
     description: 'Beautiful world clock with live weather and city photos',
     type: 'website',
   },

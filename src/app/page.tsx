@@ -117,44 +117,45 @@ export default function Home() {
   }
 
   return (
-    <main className="h-screen w-screen relative select-none">
+    <main className="h-screen w-screen relative select-none overflow-hidden">
       {/* City View */}
       {selectedCity && <CityView city={selectedCity} direction={direction} />}
 
-      {/* Top bar */}
-      <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 pt-5">
+      {/* Top bar - minimal, floating */}
+      <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-5 pt-4 sm:px-8 sm:pt-6">
+        {/* Cities button */}
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setDrawerOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-xl border border-white/15 rounded-full hover:bg-white/15 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1] rounded-full hover:bg-white/[0.1] transition-all"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
           </svg>
-          <span className="text-sm font-medium">{cities.length} Cities</span>
+          <span className="text-[13px] font-[450] opacity-60">{cities.length}</span>
         </motion.button>
 
         {/* Nav arrows */}
         {cities.length > 1 && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.88 }}
               onClick={() => navigateCity(-1)}
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-xl border border-white/15 hover:bg-white/15 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1] hover:bg-white/[0.1] transition-all"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.88 }}
               onClick={() => navigateCity(1)}
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-xl border border-white/15 hover:bg-white/15 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1] hover:bg-white/[0.1] transition-all"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </motion.button>
@@ -164,15 +165,15 @@ export default function Home() {
 
       {/* City indicator dots */}
       {cities.length > 1 && (
-        <div className="absolute bottom-8 left-0 right-0 z-30 flex justify-center gap-2">
+        <div className="absolute bottom-7 left-0 right-0 z-30 flex justify-center gap-1.5">
           {cities.map(c => (
             <motion.button
               key={c.id}
               onClick={() => selectCity(c)}
-              className={`rounded-full transition-all ${
+              className={`rounded-full transition-all duration-300 ${
                 c.id === selectedCity?.id
-                  ? 'w-6 h-2 bg-white/80'
-                  : 'w-2 h-2 bg-white/30 hover:bg-white/50'
+                  ? 'w-6 h-1.5 bg-white/70'
+                  : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/40'
               }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}

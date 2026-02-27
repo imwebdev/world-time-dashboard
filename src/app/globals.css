@@ -18,7 +18,9 @@ body {
   overflow: hidden;
   background: #000;
   color: #fff;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-clock {
@@ -26,18 +28,10 @@ body {
   font-feature-settings: 'tnum';
 }
 
-/* Smooth scrollbar for the drawer */
+/* Invisible scrollbar for drawer */
 ::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
+  width: 0;
+  height: 0;
 }
 
 /* Reduced motion */

@@ -46,7 +46,7 @@ export default function CitySearch({ onSelect, existingIds }: CitySearchProps) {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full">
       <div className="relative">
         <input
           ref={inputRef}
@@ -57,50 +57,52 @@ export default function CitySearch({ onSelect, existingIds }: CitySearchProps) {
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Search cities..."
-          className="w-full px-5 py-3.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 transition-all text-base"
+          placeholder="Add a city..."
+          className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.08] rounded-xl text-[15px] text-white placeholder-white/25 outline-none focus:border-white/[0.15] focus:bg-white/[0.07] transition-all"
         />
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+        <div className="absolute right-3.5 top-1/2 -translate-y-1/2">
           {loading ? (
             <motion.div
-              className="w-5 h-5 border-2 border-white/30 border-t-white/80 rounded-full"
+              className="w-4 h-4 border-[1.5px] border-white/20 border-t-white/60 rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
             />
           ) : (
-            <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-white/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           )}
         </div>
       </div>
+
       <AnimatePresence>
         {isOpen && results.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            className="absolute top-full mt-2 w-full bg-black/70 backdrop-blur-2xl border border-white/15 rounded-2xl overflow-hidden z-50 shadow-2xl"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full mt-1.5 w-full bg-[#111111]/95 backdrop-blur-2xl border border-white/[0.08] rounded-xl overflow-hidden z-50 shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
           >
             {results.map((city, i) => {
               const exists = existingIds.has(city.id);
               return (
                 <motion.button
                   key={city.id}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -6 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.03 }}
+                  transition={{ delay: i * 0.025 }}
                   onClick={() => !exists && handleSelect(city)}
                   disabled={exists}
-                  className={`w-full flex items-center justify-between px-5 py-3 text-left transition-colors ${
-                    exists ? 'opacity-40 cursor-default' : 'hover:bg-white/10 cursor-pointer'
+                  className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
+                    exists ? 'opacity-30 cursor-default' : 'hover:bg-white/[0.05] cursor-pointer'
                   }`}
                 >
                   <div>
-                    <p className="text-white font-medium">{city.name}</p>
-                    <p className="text-white/50 text-sm">{city.country}</p>
+                    <p className="text-[14px] text-white font-[450]">{city.name}</p>
+                    <p className="text-white/30 text-[12px] mt-0.5">{city.country}</p>
                   </div>
-                  {exists && <span className="text-white/30 text-xs">Added</span>}
+                  {exists && <span className="text-white/20 text-[11px] font-medium">Added</span>}
                 </motion.button>
               );
             })}
